@@ -43,11 +43,24 @@ class XOR_NEURAL_NETWORK:
         for i in range(4):
             print(self.X[i],"-->",self.prediction[i],"-->",self.Y[i])
 
+    def guess(self, unknown):
+        uknown_hidden_layer = sigmoid(np.dot(unknown, self.hidden_weights) + self.hidden_biases)
+        unknwon_output = sigmoid(np.dot(uknown_hidden_layer, self.output_weights) + self.output_biases)
+        print("I guess that", unknown, "becomes = ",np.round(unknwon_output),"in a XOR logical gate")
+
     
 def main():
     xorn = XOR_NEURAL_NETWORK()
     xorn.train()
     xorn.print_prediction()
+
+    # TESTING THE NETWORK:
+    print("\n..........................TEST..........................\n")
+
+    xorn.guess(np.array([0,0]))
+    xorn.guess(np.array([0,1]))
+    xorn.guess(np.array([1,0]))
+    xorn.guess(np.array([1,1]))
 
 
 if __name__ == "__main__":
